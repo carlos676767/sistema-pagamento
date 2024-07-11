@@ -1,0 +1,26 @@
+# Ignorar o diretório node_modules
+node_modules/
+
+# Ignorar o arquivo config.js
+config.json
+
+# Ignorar o arquivo .env
+.env
+
+# Ignorar diretórios do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Ignorar logs
+logs
+*.log
+npm-debug.log*
+
+# Ignorar os arquivos de ambiente do Editor/IDE
+.idea/
+.vscode/
+*.sublime-workspace
+
+# Ignorar as pastas de builds
+dist/
+build/
