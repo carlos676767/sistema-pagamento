@@ -14,22 +14,17 @@ const sheme = new Schema({
 
 const Product = mongose.model("produto", sheme)
 
-const produto = new Product({
-    nome: "carlos",
-    valor: 444
-})
-
-const newConnection = async () => {
+const newConnection = async (produto) => {
   try {
    await mongose.connect(DbInfo.url)
    await produto.save()
-   
   } catch (error) {
-
+    console.error("unexpected error")
   }
 };
 
-
-
-module.exports = newConnection
+module.exports = {
+    Product,
+    newConnection
+}
 
