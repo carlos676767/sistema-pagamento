@@ -1,12 +1,10 @@
 const express = require("express")
 const api = express()
 const config = require("../config.json")
-const consign = require("consign")
 const bodyParser = require("body-parser")
+const productRouters = require("./routers/produtos")
 api.use(bodyParser.json())
-consign()
-  .include('./routers')
-  .into(api);
+api.use(productRouters)
 
 const port = 8080 || config.port
 api.listen(port, () => {
