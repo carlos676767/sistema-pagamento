@@ -5,7 +5,7 @@
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ nome: "banana", valor: 1144111, descricao: 'aaaaaaaa' }),
+      body: JSON.stringify({ nome: "uva", valor: 20.00, descricao: 'uva morena boa' }),
     });
     const res = await data.json()
     console.log(res);

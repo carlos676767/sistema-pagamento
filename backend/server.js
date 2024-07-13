@@ -2,11 +2,12 @@ const express = require("express");
 const api = express();
 const config = require("../config.json");
 const bodyParser = require("body-parser");
-const productRouters = require("./routers/produtos");
-const connectDb = require("./db/dbPagamento");
-
+const productRouters = require("./routers/postarProdutos");
+const routerListProduct = require("./routers/listProdutos")
+const connectDb = require("./db/dbProdutos");
 api.use(bodyParser.json());
 api.use(productRouters);
+api.use(routerListProduct);
 
 const port = 8080 || config.port;
 (async () => {

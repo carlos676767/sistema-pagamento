@@ -1,1 +1,3 @@
 rota: produtos/db > add os produtos na database
+rota: db/listProdutos > lista todos os produtos.
+rota: 

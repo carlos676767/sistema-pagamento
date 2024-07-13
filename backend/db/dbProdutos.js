@@ -2,8 +2,7 @@
 const mongose = require("mongoose");
 
 const DbInfo = {
-    collection: "pagamentos",
-    url: `mongodb+srv://admin:admin1234@dados.7d94myt.mongodb.net/pagamentos`
+    url: `mongodb+srv://admin:admin1234@dados.7d94myt.mongodb.net/produtos`
 }
 
 const connectDb = async () => {
