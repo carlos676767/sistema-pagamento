@@ -5,8 +5,10 @@
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ nome: "banana", valor: 11111 }),
+      body: JSON.stringify({ nome: "banana", valor: 1144111, descricao: 'aaaaaaaa' }),
     });
+    const res = await data.json()
+    console.log(res);
   } catch (error) {
     console.log(error);
   }
