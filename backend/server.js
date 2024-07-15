@@ -5,11 +5,13 @@ const bodyParser = require("body-parser");
 const productRouters = require("./routers/postarProdutos");
 const routerListProduct = require("./routers/listProdutos")
 const updateProduct = require("./routers/updateProduct")
+const deleteProduct = require("./routers/deleteProduct")
 const connectDb = require("./db/dbProdutos");
 api.use(bodyParser.json());
 api.use(productRouters);
 api.use(routerListProduct);
 api.use(updateProduct);
+api.use(deleteProduct)
 
 const port = 8080 || config.port;
 (async () => {
