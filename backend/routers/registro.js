@@ -7,6 +7,9 @@ api.post("/register", (req, res) => {
     validateEmptyData(nome,email,senha, res)
     validePassWord(senha, res)
     valideEmail(email, res)
+    dadosRegisterDb(nome,email,senha, res)
+ 
+
   } catch (error) {
     res.send({msg: "An error occurred, try again later"}).status(404)
   }
@@ -35,6 +38,13 @@ function valideEmail(email, res) {
   }
 }
 
+function dadosRegisterDb(nome, email, senha, res) {
+  const dadoRegister = { nome, email, senha };
+  const jwtAssine = jwt.sign(dadoRegister, SECRET_KEY.secretKey, {
+    expiresIn: "30s",
+  });
+  res.send({ token: jwtAssine, register: true, status: 200 });
+}
 
 module.exports = api
 

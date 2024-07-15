@@ -5,7 +5,7 @@
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ nome: "ola",email: "carlos@.com", senha: "gyvuftyfff" }),
+      body: JSON.stringify({ nome: "carlos",email: "carls@gmail.com", senha: "gyvuftyhuygfff" }),
     });
     const res = await data.json()
     console.log(res);
