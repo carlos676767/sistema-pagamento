@@ -6,12 +6,14 @@ const productRouters = require("./routers/postarProdutos");
 const routerListProduct = require("./routers/listProdutos")
 const updateProduct = require("./routers/updateProduct")
 const deleteProduct = require("./routers/deleteProduct")
+const registerUser = require("./routers/registro")
 const connectDb = require("./db/dbProdutos");
 api.use(bodyParser.json());
 api.use(productRouters);
 api.use(routerListProduct);
 api.use(updateProduct);
 api.use(deleteProduct)
+api.use(registerUser)
 
 const port = 8080 || config.port;
 (async () => {
