@@ -1,11 +1,11 @@
 (async () => {
   try {
-    const data = await fetch("http://localhost:8080/produtos/db", {
-      method: "POST",
+    const data = await fetch("http://localhost:8080/db/editProduct", {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ nome: "uva", valor: 20.00, descricao: 'uva morena boa' }),
+      body: JSON.stringify({ nome: "uva", valor: 25554 }),
     });
     const res = await data.json()
     console.log(res);
