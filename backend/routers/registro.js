@@ -4,48 +4,39 @@ const SECRET_KEY = require("../../config.json")
 api.post("/register", (req, res) => {
   try {
     const {nome,email,senha} = req.body
-    validateEmptyData(nome,email,senha, res)
-    validePassWord(senha, res)
-    valideEmail(email, res)
+    validateEmptyData(nome,email,senha)
+    validePassWord(senha)
+    valideEmail(email)
     dadosRegisterDb(nome,email,senha, res)
- 
-
   } catch (error) {
-    res.send({msg: "An error occurred, try again later"}).status(404)
+    res.send({msg: error.message}).status(404)
   }
 });
 
-function validateEmptyData(nome,email,senha, res) {
+function validateEmptyData(nome,email,senha) {
   if (!nome && !email && !senha) {
-    res
-      .send({
-        register: false,
-        msg: "empty data, fill in the data",
-        status: 400,
-      })
-      .status(400);
+    throw new Error("empty data, fill in the data")
+   
   }
 }
 
-function validePassWord(pass, res) {
-    pass.length < 6 ? res.send({msg: "the password must have at least 7 characters"}).status(400) : null
+function validePassWord(pass) {
+  if (pass.length < 6) throw new Error("the password must have at least 7 characters")
 }
 
-function valideEmail(email, res) {
+function valideEmail(email) {
   const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  if (!regex.test(email)) {
-    res.send({ msg: "Enter a valid email address.", status: 400 }).status(400);
-  }
+  if (!regex.test(email)) throw new Error("Enter a valid email address.")
 }
 
 function dadosRegisterDb(nome, email, senha, res) {
   const dadoRegister = { nome, email, senha };
-  const jwtAssine = jwt.sign(dadoRegister, SECRET_KEY.secretKey, {
-    expiresIn: "30s",
-  });
-  res.send({ token: jwtAssine, register: true, status: 200 });
+  if (dadoRegister) {
+    const jwtAssine = jwt.sign(dadoRegister, SECRET_KEY.secretKey, {
+      expiresIn: "30s",
+    });
+    res.send({ token: jwtAssine, register: true, status: 200 });
+  }
 }
 
 module.exports = api
-
-

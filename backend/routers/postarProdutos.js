@@ -16,5 +16,4 @@ router.post("/produtos/db", async (req, res) => {
   }
 });
 
-
 module.exports = router
