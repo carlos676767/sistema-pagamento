@@ -7,7 +7,7 @@ const routerListProduct = require("./routers/listProdutos")
 const updateProduct = require("./routers/updateProduct")
 const deleteProduct = require("./routers/deleteProduct")
 const registerUser = require("./routers/registro")
-const connectDb = require("./db/dbProdutos");
+const connectDb = require("./db/db");
 api.use(bodyParser.json());
 api.use(productRouters);
 api.use(routerListProduct);

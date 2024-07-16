@@ -6,5 +6,4 @@ const RegisterPerson = new Schema({
     senha: {type: String, required: true}
 })
 
-
-module.exports = mongoose.model("registro", RegisterPerson)
+module.exports = mongoose.model("registro", RegisterPerson);

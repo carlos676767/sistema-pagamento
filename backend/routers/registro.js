@@ -1,13 +1,14 @@
 const api = require("express").Router()
 const jwt = require("jsonwebtoken")
-const SECRET_KEY = require("../../config.json")
-api.post("/register", (req, res) => {
+const SECRET_KEY = require("../../config.json");
+const RegisterModel = require("../models/registerModel");
+api.post("/register", async(req, res) => {
   try {
     const {nome,email,senha} = req.body
     validateEmptyData(nome,email,senha)
     validePassWord(senha)
     valideEmail(email)
-    dadosRegisterDb(nome,email,senha, res)
+    await dadosRegisterDb(nome,email,senha, res)
   } catch (error) {
     res.send({msg: error.message}).status(404)
   }
@@ -16,7 +17,6 @@ api.post("/register", (req, res) => {
 function validateEmptyData(nome,email,senha) {
   if (!nome && !email && !senha) {
     throw new Error("empty data, fill in the data")
-   
   }
 }
 
@@ -29,14 +29,15 @@ function valideEmail(email) {
   if (!regex.test(email)) throw new Error("Enter a valid email address.")
 }
 
-function dadosRegisterDb(nome, email, senha, res) {
-  const dadoRegister = { nome, email, senha };
-  if (dadoRegister) {
-    const jwtAssine = jwt.sign(dadoRegister, SECRET_KEY.secretKey, {
-      expiresIn: "30s",
-    });
-    res.send({ token: jwtAssine, register: true, status: 200 });
+async function dadosRegisterDb(nome, email, senha, res) {
+  const registro = await RegisterModel.findOne({email})
+  if (registro) {
+    throw new Error("the email already exists, register another email, thank you.")
   }
+  // const jwtAssine = jwt.sign(dadoRegister, SECRET_KEY.secretKey, { expiresIn: "30s",});
+  const newRegister =  new RegisterModel({nome, email,senha})
+  await newRegister.save()
+  res.status(200).send({ register: true });
 }
 
 module.exports = api
