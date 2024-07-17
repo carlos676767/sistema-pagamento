@@ -13,7 +13,8 @@ const httpPost = async () => {
       body: JSON.stringify({ nome: form.nome.value, email: form.email.value, senha: form.senha.value }),
     });
     const response = await data.json();
-    console.log(response);
+    if(data.ok) location.href = "/frontend/code.html"
+    
   } catch (error) {
     console.log(error);
   }

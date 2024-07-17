@@ -13,7 +13,6 @@ rota.put("/db/editProduct", async(req, res) => {
   } catch (error) {
     res.send({status: 204, msg: "an unexpected error occurred"}).status(204)
   }
-  
 });
 
 module.exports = rota
