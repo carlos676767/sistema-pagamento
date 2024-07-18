@@ -1,7 +1,8 @@
 const api = require("express").Router();
 const jwt = require("jsonwebtoken");
-const SECRET_KEY = require("../../config.json");
-const RegisterModel = require("../models/registerModel");
+const TempDados = require("../models/tempRegister");
+const db = require("../models/registerModel");
+const {randomCod, sendEmail} = require("../email/confirme")
 api.post("/register", async (req, res) => {
   try {
     const { nome, email, senha } = req.body;
@@ -31,16 +32,15 @@ function valideEmail(email) {
 }
 
 async function dadosRegisterDb(nome, email, senha, res) {
-  const registro = await RegisterModel.findOne({ email });
+  const registro = await db.findOne({ email });
   if (registro) {
     throw new Error("the email already exists, register another email, thank you.");
-  }
-
-  // const jwtAssine = jwt.sign(dadoRegister, SECRET_KEY.secretKey, { expiresIn: "30s",});
-  const newRegister = new RegisterModel({ nome, email, senha });
-  await newRegister.save();
-  res.status(200).send({ register: true });
+  } 
+  const codigo = randomCod()
+  await sendEmail(email, codigo)
+  const tempMyDados = new TempDados({nome: nome, email:email,senha: senha, codigo: codigo})
+  await tempMyDados.save()
+  res.status(200).send({registerParser: true})
 }
-
 
 module.exports = api;

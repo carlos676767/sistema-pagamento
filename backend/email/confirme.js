@@ -10,7 +10,6 @@ const randomCod = () => {
   return cod
 };
 
-
 const configEmail = nodemailer.createTransport({
   service: "yahoo",
   auth: {
@@ -19,19 +18,22 @@ const configEmail = nodemailer.createTransport({
   }
 });
 
-const sendEmail = async (email) => {
+const sendEmail = async (email, codigo) => {
   try {
    const send = await configEmail.sendMail({
     from: jsonConfig.email,
-    to: "kifoce6232@modotso.com",
+    to: email,
     subject: "✉️ Confirmação de E-mail Necessária!",
-    html: html(randomCod())
+    html: html(codigo)
    })
+   console.log(send);
+
   } catch (error) {
     console.error(error)
   }
 };
 
-(async() => {
-   await sendEmail()
-})();
+module.exports = {
+  sendEmail,
+  randomCod
+}

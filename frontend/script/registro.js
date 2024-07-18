@@ -1,4 +1,5 @@
 
+
 const buttom = document.querySelector("button");
 const form = document.querySelector("form");
 
@@ -13,8 +14,12 @@ const httpPost = async () => {
       body: JSON.stringify({ nome: form.nome.value, email: form.email.value, senha: form.senha.value }),
     });
     const response = await data.json();
-    if(data.ok) location.href = "/frontend/code.html"
-    
+    const {registerParser} = response
+    if (registerParser) {
+      location.href = "/frontend/code.html"
+     
+    }
+    console.log(response);
   } catch (error) {
     console.log(error);
   }
