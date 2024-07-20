@@ -10,6 +10,7 @@ const registerUser = require("./routers/registro")
 const confirm = require("./routers/confirm")
 const connectDb = require("./db/db");
 const cors = require('cors')
+const login = require("./routers/login")
 api.use(cors())
 api.use(bodyParser.json());
 api.use(productRouters);
@@ -18,6 +19,7 @@ api.use(updateProduct);
 api.use(deleteProduct)
 api.use(registerUser)
 api.use(confirm)
+api.use(login)
 
 const port = 8080 || config.port;
 (async () => {

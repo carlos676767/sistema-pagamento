@@ -3,7 +3,6 @@
 const input = document.querySelector("input")
 const butom = document.querySelector("button")
 
-  
 butom.addEventListener("click", () => {
   (async () => {
     try {
@@ -15,7 +14,12 @@ butom.addEventListener("click", () => {
         body: JSON.stringify({codigo: input.value})
       });
       const response = await httpRequest.json()
-      console.log(response);
+      const {jwt} = response
+      localStorage.setItem("jwt", jwt)
+      
+      if (response.register) location.href = "./../home.html"
+
+
     } catch (error) {
         console.log(error);
         alert('ocorreu um erro inesperado http from.')
