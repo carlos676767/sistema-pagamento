@@ -2,6 +2,7 @@ const api = require("express").Router()
 const path = require("path")
 const jsonWebToken = require("jsonwebtoken")
 const configJson = require("./../../config.json")
+const personDb = require("../models/registerModel")
 api.get("/resetPass", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "..", "frontend", "confirmCodPass.html"))
 });
@@ -18,8 +19,6 @@ api.post("/resetPass", async (req, res) => {
         return
       }
       const {email} = sucess
-      
-      
       console.log(email);
       console.log("commit testes")
     })
