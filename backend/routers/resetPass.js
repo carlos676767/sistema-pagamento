@@ -21,6 +21,7 @@ api.post("/resetPass", async (req, res) => {
       
       
       console.log(email);
+      console.log("commit testes")
     })
   } catch (error) {
 
