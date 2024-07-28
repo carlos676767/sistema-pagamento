@@ -19,7 +19,6 @@ api.use((req, res, next) => {
 api.post("/login", async(req, res) => {
   try {
     const {email,senha} = req.body
-    console.log(email,senha);
     const searchCredentials = await DbLogin.findOne({ email, senha})
     console.log(searchCredentials);
     if (searchCredentials) {

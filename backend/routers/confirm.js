@@ -8,7 +8,7 @@ api.post("/validar", async (req, res) => {
   const searchCodeConfirmation = await TempDados.findOne({codigo})
   if (searchCodeConfirmation) {
     const dados = {nome: searchCodeConfirmation.nome, email: searchCodeConfirmation.email, senha: searchCodeConfirmation.senha}
-    const jwtAssine = jwt.sign({ dados }, SECRET_KEY.secretKey, {   expiresIn: "1h",  });
+    const jwtAssine = jwt.sign({ dados }, SECRET_KEY.secretKey, {   expiresIn: "30s",  });
     const newRegister = new RegisterModel({ nome: searchCodeConfirmation.nome, email: searchCodeConfirmation.email, senha: searchCodeConfirmation.senha });
 
     

@@ -16,10 +16,8 @@ butom.addEventListener("click", () => {
       const response = await httpRequest.json()
       const {jwt} = response
       localStorage.setItem("jwt", jwt)
-      
+      console.log(jwt);
       if (response.register) location.href = "./../home.html"
-
-
     } catch (error) {
         console.log(error);
         alert('ocorreu um erro inesperado http from.')

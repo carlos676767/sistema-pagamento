@@ -1,0 +1,66 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+  * {
+      margin: 0;
+      padding: 0;
+  }
+
+  
+  .background {
+    background-image: url('background_failure.jpg'); /* Caminho para sua imagem de fundo */
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+  }
+  
+  .overlay {
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro transparente */
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+  }
+  
+  .failure-box {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .failure-box h1 {
+    color: #f44336;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .failure-box p {
+    color: #333;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  
+  .failure-box a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f44336;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  .failure-box a:hover {
+    background-color: #d32f2f;
+  }
+  

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adicionar Nova Senha</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .main-content {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      margin: 50px auto;
+    }
+
+    .navbar {
+      margin-bottom: 30px;
+    }
+
+    footer {
+      background-color: #343a40;
+      color: white;
+      padding: 10px 0;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container main-content">
+    <h2 class="text-center mb-4">Adicionar Nova Senha</h2>
+    <form>
+      <div class="form-group" style="color: white">
+        <label for="newPassword">Nova Senha:</label>
+        <input type="password" class="form-control" id="newPassword" placeholder="Digite sua nova senha" required />
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirme a Nova Senha:</label>
+        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirme sua nova senha"
+          required />
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">
+        Adicionar Senha
+      </button>
+    </form>
+  </div>
+  <footer>
+    <p>&copy; 2024 SenhaSegura. Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    const buttom = document.querySelector("button");
+    const pageURL = location.href.split("=")[1];
+    const newPassword = document.getElementById("newPassword")
+    const confirmPassword = document.getElementById("confirmPassword")
+
+    console.log(pageURL)
+    class ReqHttp {
+      constructor(url) {
+        this.url = url;
+      }
+      async httpRequestPost() {
+        if(newPassword.value != confirmPassword.value){
+          alert("as senhas precisam ser iguais");
+          return;
+        };
+
+        try {
+          const httpReq = await fetch(this.url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({jwt: pageURL, senha: newPassword.value })
+          });
+          const response = await httpReq.json();
+          console.log(response);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    }
+
+    buttom.addEventListener("click", (e) => {
+     new ReqHttp("http://localhost:8080/resetPass").httpRequestPost()
+     e.preventDefault()
+    });
+  </script>
+</body>
+
+</html>

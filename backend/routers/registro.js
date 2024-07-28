@@ -35,7 +35,7 @@ async function dadosRegisterDb(nome, email, senha, res) {
   const registro = await db.findOne({ email });
   if (registro) {
     throw new Error("the email already exists, register another email, thank you.");
-  } 
+  }
   const codigo = randomCod()
   await sendEmail(email, codigo)
   const tempMyDados = new TempDados({nome: nome, email:email,senha: senha, codigo: codigo})

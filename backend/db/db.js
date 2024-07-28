@@ -1,8 +1,8 @@
 
 const mongose = require("mongoose");
-
+const config = require("../../config.json")
 const DbInfo = {
-    url: `mongodb+srv://admin:admin1234@dados.7d94myt.mongodb.net/produtos`
+    url: config.urlDb
 }
 
 const connectDb = async () => {

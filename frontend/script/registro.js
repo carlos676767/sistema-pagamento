@@ -2,7 +2,7 @@
 
 const buttom = document.querySelector("button");
 const form = document.querySelector("form");
-
+console.log(location.href);
 
 const httpPost = async () => {
   try {
@@ -17,7 +17,6 @@ const httpPost = async () => {
     const {registerParser} = response
     if (registerParser) {
       location.href = "/frontend/code.html"
-     
     }
     console.log(response);
   } catch (error) {
