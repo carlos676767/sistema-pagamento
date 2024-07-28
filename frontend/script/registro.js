@@ -16,7 +16,7 @@ const httpPost = async () => {
     const response = await data.json();
     const {registerParser} = response
     if (registerParser) {
-      location.href = "/frontend/code.html"
+      location.href = "/sistema-pagamento/frontend/code.html"
     }
     console.log(response);
   } catch (error) {

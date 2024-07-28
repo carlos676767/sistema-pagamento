@@ -88,7 +88,10 @@
             body: JSON.stringify({jwt: pageURL, senha: newPassword.value })
           });
           const response = await httpReq.json();
-          console.log(response);
+          const {alterd} = response
+          if(alterd){
+            alert("senha alterada com sucesso.")
+          }
         } catch (err) {
           console.log(err);
         }

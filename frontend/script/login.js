@@ -17,7 +17,7 @@ addEventListener("DOMContentLoaded", () => {
   console.log(response);
   const {login} = response
   if (login) {
-      location.href = "/frontend/home.html"
+      location.href = "/sistema-pagamento/frontend/home.html"
   }
   } catch (error) {
     console.log(error)
