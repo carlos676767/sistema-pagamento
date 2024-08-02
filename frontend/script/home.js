@@ -2,42 +2,14 @@ const div = document.querySelector(".checkout")
 const span = document.querySelector("span")
 const produtosContainer = document.querySelector('[data-js="produtos-container"]')
 let contador = 0
-const itensNew = document.querySelector(".itensNew")
+const itens = document.querySelector(".itens")
 
-const httpRequestPayMent = async () => {
-  try {
-    const data = await fetch("http://localhost:8080/pagamento", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({valorUnity: 10})
-    });
-    const httpReponse = await data.json();
-    const {linkToken} = httpReponse
-    location.href = linkToken
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-httpRequestPayMent()
 
 const countItem = () => {
   ++contador
   span.innerText = `(${contador})`
-
 }
 
-const mostrarDiv = () => {
-  const divEsconder = document.getElementById("esconder")
-  divEsconder.style.display = "block"
-}
-
-const ocultarMyDiv = () => {
-  const div = document.getElementById("contemNada")
-  div.style.display = "none"
-}
 
 
 const httpRequestNewDados = async() => {
@@ -55,7 +27,6 @@ const httpRequestNewDados = async() => {
     });
     const httpReponse = await httpRequestPost.json()
     limparInputs(nameProduct, valueProduct, descricao)
-    console.log(httpReponse);
   } catch (error) {
     console.log(error);
   }
@@ -75,24 +46,36 @@ function limparInputs(input1, input2, input3) {
    input3.value = ""
 }
 
-
-
-  produtosContainer.addEventListener("click", (e) => {
-    const elementClick = e.target;
-    console.log(elementClick);
-    console.log(elementClick);
-    mostrarDiv();
-    ocultarMyDiv();
+produtosContainer.addEventListener("click", (e) => {
+  const elementClick = e.target;
     if (elementClick.tagName !== "BUTTON") {
       return;
     }
-
     const idItem = elementClick.dataset.target;
-    const item = document.querySelector(`[data-id="${idItem}"]`);
-    console.log(item);
+    const produto = document.querySelector(`[data-id="${idItem}"]`).dataset
+    const element = `<p>${produto.nome} - ${produto.preco}</p>`
+    itens.innerHTML += element
+    httpRequestPayMent(produto.preco)
     countItem();
-  });
-  
+});
+
+
+const httpRequestPayMent = async (valor) => {
+  try {
+    const data = await fetch("http://localhost:8080/pagamento", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({valorUnity: valor})
+    });
+    const httpReponse = await data.json();
+    const {linkToken} = httpReponse
+    location.href = linkToken
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 
 addEventListener("DOMContentLoaded", () => {
@@ -100,16 +83,15 @@ addEventListener("DOMContentLoaded", () => {
     const httpGet = await fetch("http://localhost:8080/db/listProdutos");
     const httpTrzerDados = await httpGet.json();
     httpTrzerDados.list.forEach((dados) => {
-      const { nome, valor, descricao } = dados;
-      itensNew.innerHTML = `${nome} <br> 1x ${valor}`
+     const { nome, valor, descricao, _id } = dados
      produtosContainer.innerHTML += `
-     <div class="grid-item" data-nome=${nome} , data-preco=${valor} data-id="1">
+     <div class="grid-item" data-nome=${nome} , data-preco=${valor} data-id=${_id}>
      <div class="grid-item">
          <img src="assets/images/image-baklava-desktop.jpg" alt="">
       
          <div class="comprar">
-             <button class="buttomCard" data-target="1"><img src="assets/images/icon-add-to-cart.svg" alt="cart"
-                     class="cart">Add To Cart</button>
+             <button class="buttomCard" data-target=${_id}><img src="assets/images/icon-add-to-cart.svg" alt="cart"
+              class="cart">Add To Cart</button>
     
          </div>
      </div>

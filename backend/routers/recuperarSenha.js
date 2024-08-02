@@ -20,9 +20,4 @@ api.post("/recuperarSenha", async (req, res) => {
   }
 });
 
-module.exports = api
-
-//usuario envia email[x]
-//ver se o email existe[x]
-//se email existe envia um codigo para o usuario[x] 
-//usuario[x]
+module.exports = api;

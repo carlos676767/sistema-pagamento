@@ -1,15 +1,7 @@
 const nodemailer = require("nodemailer");
 const config = require("../../config.json");
 const emailHtml = require("./emailConfirmAlterarsenha");
-// const randomCod = () => {
-//   let cod = "";
-//   let i = 0;
-//   while (i < 8) {
-//     cod += Math.floor(Math.random() * 10 + 1);
-//     ++i;
-//   }
-//   return cod;
-// };
+
 
 const configEmail = nodemailer.createTransport({
   service: "yahoo",
