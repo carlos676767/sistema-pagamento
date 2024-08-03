@@ -4,5 +4,7 @@
   "secretKey": "[pbTM49K*M6|*H?~hR2'3Dq!`",
   "email": "csdev4545@yahoo.com",
   "pass": "rymmfczqescpdhgr",
-  "tokenStripe": "sk_test_51PgAsgF6Dcm7kGgMgW2i2CuxLqHHe9vIigPrOafmYUpX8zoS9sIHJcz7qnGmsBPdQYZtBd5LhAIzKchMAQwpRHIa00Vs93qPAd"
+  "tokenStripe": "sk_test_51PgAsgF6Dcm7kGgMgW2i2CuxLqHHe9vIigPrOafmYUpX8zoS9sIHJcz7qnGmsBPdQYZtBd5LhAIzKchMAQwpRHIa00Vs93qPAd",
+  "client_id": "Ov23liSgy0i2QD8mnh61",
+  "cliente_secret": "69e7a0e32a31b2f8edba5fa4e99d4db40611a928"
 }

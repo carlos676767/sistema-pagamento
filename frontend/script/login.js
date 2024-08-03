@@ -14,7 +14,6 @@ addEventListener("DOMContentLoaded", () => {
       }
   })
   const response = await httpRequest.json()
-  console.log(response);
   const {login} = response
   if (login) {
       location.href = "/sistema-pagamento/frontend/home.html"
@@ -52,3 +51,20 @@ butom.addEventListener("click", (e) => {
 })
 
 
+
+const buttomGitHub = document.querySelector(".github-button")
+
+async function httpAourh() {
+  try {
+    const reqhttp = await fetch("http://localhost:8080/loginGitHub")
+    const data = await reqhttp.json()
+    const {link} = data
+    location.href = link
+  } catch (error) {
+    
+  }
+}
+
+buttomGitHub.addEventListener("click", () => {
+  httpAourh()
+})

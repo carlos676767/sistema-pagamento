@@ -65,6 +65,17 @@ static async cadastrarProduct(req,res){
 
 
 
+  static async deleteProduct(req, res){
+    try {
+        const { nome } = req.body;
+        await products.deleteOne({ nome: nome });
+        res.send({ msg: "value deleted successfully", deleted: true }).status(200);
+      } catch (error) {
+        res.send({ msg: "an error has occurred", deleted: false }).status(404);
+      }
+  }
+
+
   
 }
 

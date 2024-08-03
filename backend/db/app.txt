@@ -1,3 +1,0 @@
-rota: produtos/db > add os produtos na database
-rota: db/listProdutos > lista todos os produtos.
-rota: /db/editProduct > editar valor produto.
