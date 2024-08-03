@@ -1,8 +1,9 @@
 const config = require("../../config.json");
 const stripe = require("stripe")(config.tokenStripe);
 const products = require("../models/products");
-const jwt = require("jsonwebtoken")
+const jsonJwt = require("jsonwebtoken")
 class ProdutoController {
+  //pay
   static async postPagamento(req, res) {
     try {
       const { valorUnity } = req.body;
@@ -85,13 +86,33 @@ static async cadastrarProduct(req,res){
       }
   }
 
-
+  //pay
   static async receberIdProduct(req, res){
     try {
       const {ids} = req.body
-      console.log(ids);
+      const generateJwt = jsonJwt.sign({ids}, config.secretKey,{expiresIn: '10m'})
+      console.log(generateJwt);
+      res.send({msg: generateJwt}).status(200)
     } catch (error) {
-      
+      res.status(404).send({msg: "a 404 error occurred"})
+    }
+  }
+
+
+  static async verifyIdPaginaPay(req, res){
+    try {
+      const {jwt} = req.body
+     jsonJwt.verify(jwt, config.secretKey,  async(err, sucess) => {
+      if (err) {
+        res.status(401).send({msg: "the time on the page has expired, choose the products again"})
+        return
+      }
+      const {ids} = sucess
+      const busqueProduct =  await products.find({ _id: { $in: ids } })
+      res.status(200).send({itens: busqueProduct})
+      })
+    } catch (error) {
+      res.status(401).send({msg: 'error 404 Try again later.'})
     }
   }
 }

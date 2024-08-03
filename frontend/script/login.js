@@ -3,7 +3,6 @@ const senha = document.getElementById("password")
 
 addEventListener("DOMContentLoaded", () => {
     const jwt = localStorage.getItem("jwt")
-    console.log(jwt);
   (async () => {
   try {
     const httpRequest = await fetch("http://localhost:8080/login", {
@@ -24,10 +23,22 @@ addEventListener("DOMContentLoaded", () => {
   })();
 });
 
+
+
+function alertValoresVzios() {
+  Swal.fire({
+    icon: 'error',
+    title: 'Dados Inválidos',
+    text: 'Por favor, preencha todos os campos.',
+    confirmButtonText: 'OK'
+  });
+}
+
 const butom = document.querySelector("button")
 
 butom.addEventListener("click", (e) => {
   (async() => {
+    console.log(email.value, senha.value );
     try {
       const data = await fetch("http://localhost:8080/login", {
         method: "POST",
@@ -42,6 +53,7 @@ butom.addEventListener("click", (e) => {
         location.href = "/frontend/home.html"
         localStorage.setItem("jwt", jwt)
      }
+     alertValoresVzios()
     } catch (error) {
       console.log(error);
     }
@@ -52,7 +64,7 @@ butom.addEventListener("click", (e) => {
 
 
 
-const buttomGitHub = document.querySelector(".github-button")
+const buttomGitHub = document.querySelector(".btn-github")
 
 async function httpAourh() {
   try {
@@ -61,7 +73,7 @@ async function httpAourh() {
     const {link} = data
     location.href = link
   } catch (error) {
-    
+    console.log(error)
   }
 }
 

@@ -5,26 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tela de Login</title>
     <link rel="stylesheet" href="style/login.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
 <body>
     <div class="login-container">
-        <h2>Login</h2>
-        <form>
-            <div class="input-group">
-                <label for="email">Email</label>
-                <input type="text" id="email" name="username" required>
+        <div class="login-form">
+          <h2>Login</h2>
+          <form action="/login" method="POST">
+            <div class="form-group">
+              <label for="username"><i class="fas fa-user"></i> Email</label>
+              <input type="text" id="email" name="username" placeholder="Enter your username" required>
             </div>
-            <div class="input-group">
-                <label for="password">Senha</label>
-                <input type="password" id="password" name="password" required>
+            <div class="form-group">
+              <label for="password"><i class="fas fa-lock"></i> Password</label>
+              <input type="password" id="password" name="password" placeholder="Enter your password" required>
             </div>
-            <a href="recuperarSenha.html">Esqueceu sua senha?</a>
-            <button type="submit">Entrar</button>
-            <button type="button" class="github-button">
-               
-            </button>
-        </form>
-    </div>
+            <button type="submit" class="btn-login">Login</button>
+          </form>
+        </div>
+      
+        <div class="github-login">
+          <p>Ou faça login com:</p>
+          <button  class="btn-github" class="github-button">
+            <i class="fab fa-github"></i> Login com GitHub
+          </button>
+        
+        </div>
+      
+        <div class="forgot-password">
+          <a href="recuperarSenha.html">Esqueceu sua senha? Clique aqui para trocar</a>
+        </div>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
     <script src="script/login.js"></script>
+   
 </body>
 </html>

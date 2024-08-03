@@ -11,7 +11,6 @@ class OauthGitHub {
     };
     const url = queryString.stringify(objectDados);
     const link = `https://github.com/login/oauth/authorize?${url}`;
-    console.log(link);
     res.status(200).send({ link: link });
   }
 

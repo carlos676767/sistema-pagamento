@@ -29,7 +29,6 @@ telaPagamento.addEventListener("click", () => {
       alert("para ir ao pagamento selecione pelo o menos um item")
       return
     }
-    // location.href = "telaPagamento.html"
     try {
       const httpRequest = await fetch("http://localhost:8080/idProduct", {
         method: 'POST',
@@ -39,7 +38,9 @@ telaPagamento.addEventListener("click", () => {
         body: JSON.stringify({ids: arrayItens})
       })
       const httpResponse = await httpRequest.json()
-      console.log(httpResponse);
+      console.log( httpResponse.msg);
+      localStorage.setItem("tokenId", httpResponse.msg)
+      location.href = "telaPagamento.html"
     } catch (error) {
       console.log(error);
     }
