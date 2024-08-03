@@ -7,64 +7,21 @@
     <title>Document</title>
     <link rel="stylesheet" href="../frontend//style/style.css">
 </head>
-
 <body>
-    <main>
-        <div class="grid-container" data-js="produtos-container">
-
-           
-            
-        </div>
-        <div class="checkout">
-            <div class="cartcehck">
-                <h1>You Cart</h1>
-                <span>(0)</span>
-            </div>
-           <div class="checkout" id="esconder">
-            <div class="itens">
-
-                <p class="itensNew"></p>
-            </div>
-            <div class="efetuarPagamento">
-                <button class="efetuar" >Efetuar pagamento</button>
-            </div>
-           </div>
-           
-
-
-
-           <!-- <div class="contemNada" id="contemNada">
-            <div class="itensDada">
-                <img src="assets/images/illustration-empty-cart.svg" alt="nada" class="imgNada">
-            <p>Por favor adicione itens, <br> seu carrinho esta vazio.</p>
-            </div>
-           </div> -->
-<p></p>
-        </div>
+    <header class="header">
         <div class="container">
-            <h1>Cadastro de Produto</h1>
-            <form action="#">
-                <div class="form-group">
-                    <label for="nome">Nome do Produto:</label>
-                    <input type="text" id="nome" name="nome" required>
-                </div>
-                <div class="form-group">
-                    <label for="valor">Valor do Produto:</label>
-                    <input type="number" id="valor" name="valor" required>
-                </div>
-                <!-- <div class="form-group">
-                    <label for="imagem">Imagem do Produto:</label>
-                    <input type="file" id="imagem" name="imagem" accept="image/*" required>
-                </div> -->
-                <div class="form-group">
-                    <label for="descricao">Descrição do Produto:</label>
-                    <textarea id="descricao" name="descricao" rows="4" required></textarea>
-                </div>
-                <button id="buttomHttppost">Cadastrar Produto</button>
-            </form>
+            <h1>🛒 Meu Carrinho</h1>
+            <nav>
+                <a href="cart.html" class="active"><i class="fas fa-shopping-cart"></i> Carrinho</a>
+                <button class="fimPay"><i class="fas fa-credit-card"></i> Finalizar Compra</button>
+            </nav>
         </div>
-    </main>
+    </header>
+    <section class="container" data-js="produtos-container">
+  
+    </section>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="script/home.js"></script>
 </body>
-
 </html>

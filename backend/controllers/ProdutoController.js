@@ -1,6 +1,7 @@
 const config = require("../../config.json");
 const stripe = require("stripe")(config.tokenStripe);
 const products = require("../models/products");
+const jwt = require("jsonwebtoken")
 class ProdutoController {
   static async postPagamento(req, res) {
     try {
@@ -14,11 +15,18 @@ class ProdutoController {
       };
 
       const item = { price_data, quantity: 1 };
-      const { url } = await stripe.checkout.sessions.create({
+      const {id, url} = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        payment_method_types: ['card', 'boleto'],
+        payment_method_options: {
+          boleto: {
+            expires_after_days: 7
+          }
+        },
         line_items: [item],
         mode: "payment",
-        success_url: "http://localhost:8080/sucesso.html",
-        cancel_url: "https://www.invertexto.com/gerador-email-temporario",
+        success_url: "http://localhost:8080/pagamentoSucesso.html",
+        cancel_url: "http://localhost:8080/pagamentoCaneclado.html",
       });
       res.status(201).send({ link: "generated payment link", linkToken: url });
     } catch (error) {
@@ -51,13 +59,15 @@ class ProdutoController {
 
 static async cadastrarProduct(req,res){
     try {
-        const { nome, valor, descricao } = req.body;
-        if (!nome && !valor, !descricao) {
+        const { nome, valor, descricao, url } = req.body;
+        if (!nome && !valor, !descricao, !url) {
           res.send({ falha: "the data must be entered.", status: 404 }) .status(404);
+       
         }
-        const produto = new products({nome: nome,  valor: valor, descricao: descricao });
+        const produto = new products({nome: nome,  valor: valor, descricao: descricao,url: url });
         await produto.save()
         res.status(200).send({ status: 200, msg: "data placed successfully" });
+ 
       } catch (error) {
         res.status(404).send({ status: 404, msg: "unexpected error" });
       }
@@ -76,7 +86,14 @@ static async cadastrarProduct(req,res){
   }
 
 
-  
+  static async receberIdProduct(req, res){
+    try {
+      const {ids} = req.body
+      console.log(ids);
+    } catch (error) {
+      
+    }
+  }
 }
 
 module.exports = ProdutoController;

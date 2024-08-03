@@ -1,7 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finalizar Compra</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <h1>🛍️ Finalizar Compra</h1>
+    <nav>
+      <a href="cart.html"><i class="fas fa-arrow-left"></i> Voltar ao Carrinho</a>
+    </nav>
+  </div>
+</header>
+
+<section class="container">
+  <div class="checkout">
+    <div class="order-summary">
+      <h2>Resumo do Pedido</h2>
+      <div class="order-details">
+        <p><strong>Produto 1</strong> - R$ 50,00</p>
+        <p><strong>Produto 2</strong> - R$ 30,00</p>
+        <p><strong>Produto 3</strong> - R$ 25,00</p>
+        <hr>
+        <p><strong>Total a Pagar:</strong> R$ 105,00</p>
+      </div>
+    </div>
+    <div class="payment-method">
+      <h2>Forma de Pagamento</h2>
+      <div class="payment-options">
+        <label>
+          <input type="radio" name="payment" checked>
+          <span>Cartão de Crédito</span>
+        </label>
+        <label>
+          <input type="radio" name="payment">
+          <span>Boleto Bancário</span>
+        </label>
+        <label>
+          <input type="radio" name="payment">
+          <span>Pix</span>
+        </label>
+      </div>
+      <button class="pay-btn"><i class="fas fa-credit-card"></i> Pagar Agora</button>
+    </div>
+  </div>
+</section>
+
+
+<style>
+    /* Reset de estilos e estilos gerais */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    padding: 0;
   }
   
   body {
@@ -14,9 +71,6 @@
     margin: 0 auto;
     padding: 0 20px;
   }
-
-
-
   
   .header {
     background-color: #4CAF50;
@@ -44,9 +98,11 @@
     background-color: #45a049;
   }
   
+  /* Estilos do carrinho */
   .cart {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
     margin-top: 20px;
   }
   
@@ -89,7 +145,7 @@
     font-weight: bold;
   }
   
-  .product .buttomCard {
+  .product .remove-btn {
     background-color: #ff6347;
     color: #fff;
     border: none;
@@ -99,7 +155,7 @@
     transition: background-color 0.3s;
   }
   
-  .product .buttomCard:hover {
+  .product .remove-btn:hover {
     background-color: #cc4636;
   }
   
@@ -185,7 +241,6 @@
     background-color: #45a049;
   }
   
-
-  .buttomCard{
-    width: 100%;
-  }
+</style>
+</body>
+</html>
