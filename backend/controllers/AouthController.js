@@ -35,7 +35,6 @@ class OauthGitHub {
       const myToken = httpRquest.data.split("&")[0].split("=")[1];
       const acessUser = await OauthGitHub.acessUser(myToken)
       console.log(acessUser);
-      
     }catch(error) {
         res.status(404).send({msg: 'an unexpected error occurred'})
     }
