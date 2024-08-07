@@ -13,6 +13,7 @@ class PagamentosItens {
     }
   }
 
+
   static async verifyIdPaginaPay(req, res) {
     try {
       const { jwt } = req.body;

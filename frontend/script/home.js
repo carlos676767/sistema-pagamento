@@ -12,9 +12,9 @@ produtosContainer.addEventListener("click", (e) => {
       return;
     }
     const idItem = elementClick.dataset.target;
-    arrayItens.push(idItem)
-    console.log(arrayItens);
-
+    if (!arrayItens.includes(idItem)) {
+      arrayItens.push(idItem)
+    }
     // const produto = document.querySelector(`[data-id="${idItem}"]`).dataset
     // const element = `<p>${produto.nome} - ${produto.preco}</p>`
     // console.log(produto.nome);
@@ -48,23 +48,6 @@ telaPagamento.addEventListener("click", () => {
 })
 
 
-const httpRequestPayMent = async (valor) => {
-  try {
-    const data = await fetch("http://localhost:8080/pagamento", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({valorUnity: valor})
-    });
-    const httpReponse = await data.json();
-    const {linkToken} = httpReponse
-    location.href = linkToken
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 
 addEventListener("DOMContentLoaded", () => {
   (async () => {
@@ -85,6 +68,7 @@ addEventListener("DOMContentLoaded", () => {
   </div>  
      `;
     });
-    // httpRequestPayMent(44444)
   })();
 });
+
+// httpRequestPayMent(44444)
