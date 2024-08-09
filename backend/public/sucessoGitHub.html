@@ -7,9 +7,112 @@
   <title>Document</title>
 </head>
 
+<style>
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f3f3f3;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+  }
+
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #555;
+  }
+
+  .profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    text-align: center;
+  }
+
+  .profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-right: 20px;
+    border: 4px solid #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .profile-info {
+    text-align: left;
+  }
+
+  .profile-info h2 {
+    color: #333;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+  }
+
+  .profile-info p {
+    color: #666;
+    font-size: 1.2em;
+    line-height: 1.6;
+  }
+
+  .welcome-text {
+    margin-bottom: 40px;
+    font-size: 1.2em;
+  }
+
+  .countdown {
+    font-size: 2em;
+    margin-top: 20px;
+    color: #4caf50;
+  }
+
+  footer {
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+  }
+</style>
+
 <body>
-  <h2>ola seja bem vindo, obrigado.</h2>
-  
+  <div class="container">
+    <header>
+      <h1>Bem-vindo à Página de Boas-vindas</h1>
+      <p>Explore nossos recursos incríveis e aproveite sua experiência!</p>
+    </header>
+
+    <div class="profile">
+      <img src="https://via.placeholder.com/150" alt="Foto de Perfil" class="profile-img" />
+      <div class="profile-info">
+        <h2>Nome da Pessoa</h2>
+        <p>Em breve você será redirecionado para nossa página de vendas..</p>
+      </div>
+    </div>
+
+    <div class="welcome-text">
+      <p>
+        Seja bem-vindo(a)! Em <span id="countdown">5</span> segundos, você
+        começará a aproveitar todos os nossos itens. Boas compras!
+      </p>
+    </div>
+
+    <footer>
+      &copy; 2024 Página de Boas-vindas. Todos os direitos reservados.
+    </footer>
+  </div>
+
   <script>
     addEventListener("DOMContentLoaded", async () => {
       const url = location.href.split("=")[1];
@@ -22,13 +125,22 @@
             },
             body: JSON.stringify({ token: url }),
           });
-          const data = await httpPost.json();
-          alert("em 5 segundos voce vai redirecionado.")
-          setInterval(() => {
-            location.href = "./../../frontend/index.html"
-          }, 5000)()
+          const { avatar_url, login } = await httpPost.json();
+          console.log(avatar_url, login);
+          const h2 = (document.querySelector("h2").innerHTML = login);
+          const img = (document.querySelector("img").src = avatar_url);
+          const span = document.querySelector("span");
+          let contador = 5;
+
+          const temp = setInterval(() => {
+            --contador;
+            span.innerHTML = contador;
+            if (contador == 0) {
+              clearInterval(temp);
+            }
+          }, 1000);
         } catch (error) {
-          console.log(error)
+          console.log(error);
         }
       }
     });

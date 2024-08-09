@@ -6,21 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../frontend//style/style.css">
+    <link href="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.min.css
+" rel="stylesheet">
+
 </head>
 <body>
     <header class="header">
         <div class="container">
             <h1>🛒 Meu Carrinho</h1>
             <nav>
-                <a href="cart.html" class="active"><i class="fas fa-shopping-cart"></i> Carrinho</a>
+                <a href="#" class="active" id="cart"><i class="fas fa-shopping-cart"></i> Carrinho</a>
                 <button class="fimPay"><i class="fas fa-credit-card"></i> Finalizar Compra</button>
             </nav>
         </div>
     </header>
-    <section class="container" data-js="produtos-container">
+    <section class="produtos-container" data-js="produtos-container">
   
     </section>
 
+
+    <div id="cartModal" class="modal">
+        <div class="modal-content" id="modal-content">
+          <span class="close">&times;</span>
+          <h2>Itens do Carrinho</h2>
+          <ul id="cartItems">
+          </ul>
+          <div class="modal-footer">
+            <button id="closeModalBtn">Fechar Carrinho</button>
+          </div>
+        </div>
+      </div>
+      <script src="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.all.min.js
+"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="script/home.js"></script>
 </body>

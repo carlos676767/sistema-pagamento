@@ -13,6 +13,17 @@ function mostrarValorCompraFinal() {
   orderDetails.appendChild(valorFinal);
 }
 
+function tempExpiedAlert() {
+  Swal.fire({
+    icon: 'warning',
+    title: 'Tempo de pagamento expirado!',
+    text: 'Faça uma nova solicitação com os produtos.',
+    confirmButtonText: 'OK',
+  });
+}
+
+
+
 async function getItensFromApi() {
   try {
     const data = await fetch("http://localhost:8080/verifyTokenPay", {
@@ -23,7 +34,14 @@ async function getItensFromApi() {
       body: JSON.stringify({ jwt: jwt }),
     });
 
-    const { itens } = await data.json();
+    const { itens, tempExpired } = await data.json();
+    console.log(tempExpired);
+    if (tempExpired) {
+      setTimeout(() => {
+        tempExpiedAlert()
+        location.href = "../index.html"
+      }, 3000)
+    }
     itens.forEach((itens) => {
       const { nome, valor } = itens;
       mostrarElemntos(nome, valor);

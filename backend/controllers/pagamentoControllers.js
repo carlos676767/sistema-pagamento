@@ -6,6 +6,7 @@ class PagamentosItens {
   static async receberIdProduct(req, res) {
     try {
       const { ids } = req.body;
+      console.log(ids);
       const generateJwt = jsonJwt.sign({ ids }, config.secretKey, { expiresIn: "10m",});
       res.send({ msg: generateJwt }).status(200);
     } catch (error) {
@@ -19,7 +20,7 @@ class PagamentosItens {
       const { jwt } = req.body;
       jsonJwt.verify(jwt, config.secretKey, async (err, sucess) => {
         if (err) {
-          res.status(401).send({  msg: "the time on the page has expired, choose the products again", });
+          res.status(401).send({  msg: "the time on the page has expired, choose the products again", tempExpired: false });
           return ;
         }
         const { ids } = sucess;
@@ -36,10 +37,11 @@ class PagamentosItens {
       const { ids } = req.body;
       const busqueProduct = await products.find({ _id: { $in: ids } });
       const valoresItens = busqueProduct.map((data) => data.valor).reduce((a, cc) => a + cc);
+      const buscarNomesProdutos = busqueProduct.map(data => data.nome).join(",")
       const centavos = valoresItens * 100;
       const price_data = {
         currency: "brl",
-        product_data: { name: "Comidas caseiras" },
+        product_data: { name: buscarNomesProdutos },
         unit_amount: centavos,
       };
 
@@ -62,7 +64,6 @@ class PagamentosItens {
       res.status(401).send({ msg: "the link was not generated, try again." });
     }
   }
-
 }
 
 module.exports = PagamentosItens

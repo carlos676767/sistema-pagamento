@@ -88,6 +88,9 @@
       .fa-file-pdf {
         margin-left: 5px;
       }
+      button{
+        border: none;
+      }
 </style>
 <body>
 <header class="header">
@@ -108,25 +111,41 @@
       <p><strong>Invoice Number:</strong> INV-789</p>
     </div>
     <div class="download-pdf">
-      <a href="#" class="btn-download">Download PDF <i class="fas fa-file-pdf"></i></a>
+      <button  class="btn-download">
+        Download PDF <i class="fas fa-file-pdf"></i>
+      </button>
     </div>
   </div>
   <script>
-    const downloadpdf = document.querySelector(".download-pdf")
-    const orderdetails = document.querySelector(".order-details")
-    const gerarPdfTransao = () => {
-        const newPdf = new jsPDF();
-     
-    newPdf.text('a', 10, 10);
-
-
-    newPdf.save('document.pdf');
+    const div = document.querySelector(".success-box")
+    const buttom = document.querySelector("button")
+    function createTagElement(url){
+      const a = document.createElement("a")
+      a.href = url
+      a.download = 'comprovamente.png'
+      a.style.objectFit = "cover"
+      a.click()
     }
-    downloadpdf.addEventListener("click", () => {
-        gerarPdfTransao()
+
+    console.log(nextBigger(12))//21
+console.log(nextBigger(2017))//2071
+console.log(nextBigger(513))//531
+    const baixarImg = async() => {
+      buttom.style.display = "none"
+      const baixar = await html2canvas(div)
+      const url = baixar.toDataURL()
+      
+      createTagElement(url)
+      buttom.style.display = "block"
+    }
+  
+    buttom.addEventListener("click", () => {
+      baixarImg()
     })
+    
   </script>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </body>
 </html>

@@ -15,16 +15,12 @@ class ProdutoController {
     try {
       const { nome, valor } = req.body;
       const productFind = await products.findOne({ nome: nome });
-      productFind == null
-        ? res.status(404).send({ msg: "The sent data was not found 404" })
-        : null;
+      productFind == null ? res.status(404).send({ msg: "The sent data was not found 404" }) : null;
       productFind.valor = valor;
       productFind.save();
       res.status(200).send({ status: 200, msg: "items updated successfully." });
     } catch (error) {
-      res
-        .status(204)
-        .send({ status: 204, msg: "an unexpected error occurred" });
+      res.status(204)  .send({ status: 204, msg: "an unexpected error occurred" });
     }
   }
 
@@ -32,9 +28,7 @@ class ProdutoController {
     try {
       const { nome, valor, descricao, url } = req.body;
       if ((!nome && !valor, !descricao, !url)) {
-        res
-          .send({ falha: "the data must be entered.", status: 404 })
-          .status(404);
+        res.send({ falha: "the data must be entered.", status: 404 }).status(404);
       }
       const produto = new products({
         nome: nome,
