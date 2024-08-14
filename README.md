@@ -2,6 +2,18 @@
 
 Este é um mini sistema de e-commerce com funcionalidades básicas para gerenciar usuários e produtos, além de processar pagamentos e lidar com a recuperação de senhas. 🛒💳
 
+## Tecnologias Usadas
+
+- **HTML**: 🌐
+- **CSS**: 🎨
+- **JavaScript**: 🖥️
+- **Node.js**: 🚀
+- **Express**: ⚙️
+- **Mongoose**: 🐍
+- **JWT (JSON Web Tokens)**: 🔑
+- **Stripe**: 💳
+- **Nodemailer**: 📧
+
 ## Funcionalidades
 
 - **Login com GitHub**: Permite que os usuários façam login usando suas contas do GitHub. 🐙🔑
