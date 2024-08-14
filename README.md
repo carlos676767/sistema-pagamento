@@ -13,6 +13,7 @@ Este é um mini sistema de e-commerce com funcionalidades básicas para gerencia
 - **JWT (JSON Web Tokens)**: 🔑
 - **Stripe**: 💳
 - **Nodemailer**: 📧
+- **sweetalert2**: ⚠️
 
 ## Funcionalidades
 
