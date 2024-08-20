@@ -2,7 +2,7 @@ const config = require("../../config.json");
 const products = require("../models/products");
 
 class ProdutoController {
-  static async listProduct(req, res) {
+  static  async listProduct(req, res) {
     try {
       const product = await products.find();
       res.send({ status: 200, list: product }).status(404);

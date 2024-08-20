@@ -6,19 +6,17 @@ const bodyParser = require("body-parser");
 const confirm = require("./routers/confirm")
 const connectDb = require("./db/db");
 const cors = require('cors')
-const login = require("./routers/login")
-const recuperarSenha = require("../backend/routers/recuperarSenha")
-const pagePassReset = require("./routers/resetPass")
+const login = require("./routers/auth/login")
+const passRouter = require("./routers/pass/resetPass")
 const produtos = require("./routers/products/produtos")
-const routerGitHub = require("./routers/auth/oAuth/gitHub")
+const routerGitHub = require("./routers/auth/oAuthv2/gitHub")
 const registro = require("../backend/routers/auth/registro")
 api.use(cors())
 api.use(bodyParser.json());
 
 api.use(confirm)
 api.use(login)
-api.use(recuperarSenha)
-api.use(pagePassReset)
+api.use(passRouter)
 api.use(produtos)
 api.use(routerGitHub)
 api.use(express.static("public"))

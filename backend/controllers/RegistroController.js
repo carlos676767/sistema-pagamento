@@ -1,11 +1,18 @@
+const {randomCod, sendEmail} = require("../email/confirme");
 const Db = require("../models/tempRegister");
+
 class RegistroUser {
   static async cadastrarUser(req, res) {
-    const { nome, email, senha } = req.body;
-    this.#validateEmptyData(nome, email, senha);
-    this.#validePassWord(senha)
-    this.#valideEmail(email)
-    await this.#dadosRegisterDb(nome, email, senha, res)
+    try {
+      const { nome, email, senha } = req.body;
+       RegistroUser.#validateEmptyData(nome, email, senha);
+      RegistroUser.#validePassWord(senha)
+      RegistroUser.#valideEmail(email)
+      await RegistroUser.#dadosRegisterDb(nome, email, senha, res)
+    } catch (error) {
+      res.send({msg: error.message})
+      console.log(error.message)
+    }
   }
 
   static #validateEmptyData(nome, email, senha) {
@@ -30,7 +37,7 @@ class RegistroUser {
     const registro = await Db.findOne({ email });
     if (registro) {
       throw new Error("the email already exists, register another email, thank you.");
-    }
+    };
     const codigo = randomCod()
     await sendEmail(email, codigo)
     const tempMyDados = new Db({nome: nome, email:email,senha: senha, codigo: codigo})

@@ -7,4 +7,5 @@ const TempDados = new Schema({
     codigo: {type: String, required: true}
 })
 
+
 module.exports = mongoose.model("temp", TempDados);

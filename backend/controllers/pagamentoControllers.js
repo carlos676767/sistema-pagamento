@@ -15,7 +15,7 @@ class PagamentosItens {
   }
 
 
-  static async verifyIdPaginaPay(req, res) {
+  static  async verifyIdPaginaPay(req, res) {
     try {
       const { jwt } = req.body;
       jsonJwt.verify(jwt, config.secretKey, async (err, sucess) => {
@@ -59,7 +59,7 @@ class PagamentosItens {
         success_url: "http://localhost:8080/pagamentoSucesso.html",
         cancel_url: "http://localhost:8080/pagamentoCaneclado.html",
       });
-      res.status(201).send({ link: "generated payment link", linkToken: url });
+      res.status(201).send({ link: "generated payment link", linkToken: url, idPay: id });
     } catch (error) {
       res.status(401).send({ msg: "the link was not generated, try again." });
     }
