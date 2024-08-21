@@ -2,7 +2,7 @@ const express = require("express");
 const api = express();
 const config = require("../config.json");
 const bodyParser = require("body-parser");
-
+const imgRouter = require("./routers/imageRouter/imageRouter")
 const confirm = require("./routers/confirm")
 const connectDb = require("./db/db");
 const cors = require('cors')
@@ -21,6 +21,7 @@ api.use(produtos)
 api.use(routerGitHub)
 api.use(express.static("public"))
 api.use(registro)
+api.use(imgRouter)
 const port = 8080 || config.port;
 (async () => {
   await connectDb();

@@ -52,7 +52,6 @@
   
   .product {
     background-color: #fff;
-    width: calc(30% - 20px);
     margin: 10px;
     padding: 15px;
     border-radius: 8px;
@@ -64,10 +63,7 @@
     transform: translateY(-5px);
   }
   
-  .product img {
-    width: 100%;
-    border-radius: 8px;
-  }
+
   
   .product .details {
     margin-top: 10px;

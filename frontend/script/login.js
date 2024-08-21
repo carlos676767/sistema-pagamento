@@ -2,7 +2,8 @@ const email = document.getElementById("email")
 const senha = document.getElementById("password")
 
 addEventListener("DOMContentLoaded", () => {
-    const jwt = localStorage.getItem("jwt")
+  const jwt = localStorage.getItem("jwt")
+  console.log(jwt);
   (async () => {
   try {
     const httpRequest = await fetch("http://localhost:8080/login", {
@@ -13,9 +14,11 @@ addEventListener("DOMContentLoaded", () => {
       }
   })
   const response = await httpRequest.json()
+  console.log(response);
   const {login} = response
+  console.log(login);
   if (login) {
-      location.href = "/sistema-pagamento/frontend/home.html"
+      location.href = "/sistema-pagamento/frontend/index.html"
   }
   } catch (error) {
     console.log(error)
@@ -39,6 +42,10 @@ const butom = document.querySelector("button")
 butom.addEventListener("click", (e) => {
   (async() => {
     console.log(email.value, senha.value );
+    if (email.value.trim() == "" || senha.value == "") {
+      alertValoresVzios()
+      return
+    }
     try {
       const data = await fetch("http://localhost:8080/login", {
         method: "POST",
@@ -50,10 +57,10 @@ butom.addEventListener("click", (e) => {
       const res = await data.json()
       const {jwt} = res
       if (jwt) {
-        location.href = "/frontend/home.html"
+        location.href = "/sistema-pagamento/frontend/index.html"
+        
         localStorage.setItem("jwt", jwt)
      }
-     alertValoresVzios()
     } catch (error) {
       console.log(error);
     }

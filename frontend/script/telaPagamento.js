@@ -1,7 +1,8 @@
 const jwt = localStorage.getItem("tokenId");
-let sumValue = 0;
 const valorFinal = document.createElement("p");
 const orderDetails = document.querySelector(".order-details");
+
+const btn = document.querySelector(".pay-btn");
 function mostrarElemntos(item, valor) {
   const txtPay = document.createElement("p");
   txtPay.innerHTML = `<strong>${item}</strong> - ${valor}`;
@@ -22,8 +23,16 @@ function tempExpiedAlert() {
   });
 }
 
-
-
+const tempExpiredFuncftion = (temp) => {
+  if (temp == true) {
+    console.log(temp);
+    setTimeout(() => {
+      tempExpiedAlert()
+      location.href = "../index.html"
+    }, 3000)
+  }
+}
+let sumValue = 0;
 async function getItensFromApi() {
   try {
     const data = await fetch("http://localhost:8080/verifyTokenPay", {
@@ -35,13 +44,7 @@ async function getItensFromApi() {
     });
 
     const { itens, tempExpired } = await data.json();
-    console.log(tempExpired);
-    if (tempExpired) {
-      setTimeout(() => {
-        tempExpiedAlert()
-        location.href = "../index.html"
-      }, 3000)
-    }
+    tempExpiredFuncftion(tempExpired)
     itens.forEach((itens) => {
       const { nome, valor } = itens;
       mostrarElemntos(nome, valor);
@@ -75,7 +78,7 @@ const gerarLinkPayBoletoECartao = async () => {
 };
 
 
-const btn = document.querySelector(".pay-btn");
+
 btn.addEventListener("click", () => {
   gerarLinkPayBoletoECartao();
 });

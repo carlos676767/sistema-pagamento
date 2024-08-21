@@ -43,7 +43,7 @@ closeModalBtn.addEventListener("click", () => {
 
 function alertProductVazio() {
   Swal.fire({
-    icon: 'warning', 
+    icon: 'warning',
     title: 'Adicione pelo menos 1 item',
     text: 'Você precisa selecionar ao menos um item para prosseguir.',
     confirmButtonText: 'OK',
@@ -84,17 +84,36 @@ addEventListener("DOMContentLoaded", () => {
       produtosContainer.innerHTML += `
      <div class="cart" data-nome=${nome} , data-preco=${valor} data-id=${_id}>
      <div class="product">
-         <img src=${url} alt="Produto 1">
+         <img src=${url} alt="Produto 1" class="img">
          <div class="details">
            <h2 class="textNameItem">${nome}</h2>
            <p>${descricao}.</p>
            <p class="price" class="ValueItem">${valor}</p>
-           <button class="buttomCard"  data-target=${_id}> Adicionar <i class="fas fa-shopping-cart"></i></button>
+            <button class="buttomCard"  data-target=${_id}> Adicionar <i class="fas fa-shopping-cart"></i></button>
          </div>
   </div>  
      `;
     });
   })();
 });
+
+
+
+
+addEventListener("DOMContentLoaded", () => {
+  const jwt = localStorage.getItem("jwt")
+  console.log(jwt);
+  (async() => {
+    const reqhttpValideToken = await fetch("http://localhost:8080/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({jwt: jwt})
+    })
+    const aguardeResHttp = await reqhttpValideToken.json()
+    console.log(aguardeResHttp);
+  })()
+})
 
 // httpRequestPayMent(44444)

@@ -5,6 +5,7 @@ const form = document.querySelector("form");
 console.log(location.href);
 
 const httpPost = async () => {
+  console.log( form.nome.value,form.email.value ,  form.senha.value);
   try {
     const data = await fetch("http://localhost:8080/register", {
       method: "POST",

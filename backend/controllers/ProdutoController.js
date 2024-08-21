@@ -15,12 +15,15 @@ class ProdutoController {
     try {
       const { nome, valor } = req.body;
       const productFind = await products.findOne({ nome: nome });
-      productFind == null ? res.status(404).send({ msg: "The sent data was not found 404" }) : null;
+      if ( productFind == null) {
+        res.status(404).send({ msg: "The sent data was not found 404" }) ;
+        return 
+      }
       productFind.valor = valor;
       productFind.save();
       res.status(200).send({ status: 200, msg: "items updated successfully." });
     } catch (error) {
-      res.status(204)  .send({ status: 204, msg: "an unexpected error occurred" });
+      res.status(204).send({ status: 204, msg: "an unexpected error occurred" });
     }
   }
 
@@ -52,6 +55,6 @@ class ProdutoController {
       res.send({ msg: "an error has occurred", deleted: false }).status(404);
     }
   }
-}
+};
 
 module.exports = ProdutoController;

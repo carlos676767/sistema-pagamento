@@ -67,8 +67,7 @@
     const pageURL = location.href.split("=")[1];
     const newPassword = document.getElementById("newPassword")
     const confirmPassword = document.getElementById("confirmPassword")
-
-    console.log(pageURL)
+    
     class ReqHttp {
       constructor(url) {
         this.url = url;
@@ -88,7 +87,10 @@
             body: JSON.stringify({jwt: pageURL, senha: newPassword.value })
           });
           const response = await httpReq.json();
-          const {alterd} = response
+          const {alterd, msg, err} = response
+          if(err){
+            alert("tempo expirado.")
+          }
           if(alterd){
             alert("senha alterada com sucesso.")
           }

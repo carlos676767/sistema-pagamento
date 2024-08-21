@@ -32,13 +32,14 @@ class RegistroUser {
     if (!regex.test(email)){
       throw new Error("Enter a valid email address.");
     }
-  }
+  };
+
  static async #dadosRegisterDb(nome, email, senha, res) {
     const registro = await Db.findOne({ email });
     if (registro) {
       throw new Error("the email already exists, register another email, thank you.");
     };
-    const codigo = randomCod()
+    const codigo = randomCod();
     await sendEmail(email, codigo)
     const tempMyDados = new Db({nome: nome, email:email,senha: senha, codigo: codigo})
     await tempMyDados.save()
