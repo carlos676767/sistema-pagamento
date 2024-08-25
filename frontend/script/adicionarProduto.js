@@ -90,12 +90,9 @@ const myModal = document.getElementById("myModal")
 const closer = document.querySelector(".close")
 
 
-
 function displayButton(estado) {
   myModal.style.display = estado
 }
-
-
 
 deletebtn.addEventListener("click", () => {
   displayButton("block")

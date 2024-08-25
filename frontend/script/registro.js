@@ -15,6 +15,7 @@ const httpPost = async () => {
       body: JSON.stringify({ nome: form.nome.value, email: form.email.value, senha: form.senha.value }),
     });
     const response = await data.json();
+    console.log(response);
     const {registerParser} = response
     if (registerParser) {
       location.href = "/sistema-pagamento/frontend/code.html"

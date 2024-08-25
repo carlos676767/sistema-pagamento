@@ -14,7 +14,7 @@ class ConfirmSenha {
     await ConfirmSenha.#createDadosDatabase(database.nome, database.email,  database.senha, database.id,  res  );
     await ConfirmSenha.#dropDataBase(DbTemp)
   }
-
+  
   static async #createDadosDatabase(nome, email, senha, id, res) {
     try {
       const jwtJson = ConfirmSenha.#generateJwt(id);

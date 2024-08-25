@@ -1,18 +1,16 @@
-
 const mongose = require("mongoose");
-const config = require("../../config.json")
+const config = require("../../config.json");
 const DbInfo = {
-    url: config.urlDb
-}
+  url: config.urlDb,
+};
 
 const connectDb = async () => {
   try {
-   await mongose.connect(DbInfo.url)
+    await mongose.connect(DbInfo.url);
+    console.log("db connect.");
   } catch (error) {
-    console.error("unexpected error")
+    console.error("unexpected error");
   }
 };
 
-module.exports = connectDb
-
-
+module.exports = connectDb;

@@ -23,9 +23,11 @@
     <div class="order-summary">
       <h2>Resumo do Pedido</h2>
       <div class="order-details">
-  
-
-       
+        
+        <label for="cep">Digite sua cidade:</label>
+        <input type="text" id="cep" class="cep-input">
+        <button id="calcFreteBtn" class="calc-frete-btn">Calcular Frete</button>
+        <p id="frete" class="frete-info"></p>
       </div>
     </div>
     <div class="payment-method">
@@ -39,16 +41,13 @@
           <input type="radio" name="payment">
           <span>Boleto Bancário</span>
         </label>
-       
       </div>
       <button class="pay-btn"><i class="fas fa-credit-card"></i> Pagar Agora</button>
     </div>
   </div>
 </section>
 
-<script src="
-https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.all.min.js
-"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.all.min.js"></script>
 <script src="script/telaPagamento.js"></script>
 </body>
 </html>

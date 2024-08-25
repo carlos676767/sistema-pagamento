@@ -6,7 +6,6 @@ class PagamentosItens {
   static async receberIdProduct(req, res) {
     try {
       const { ids } = req.body;
-      console.log(ids);
       const generateJwt = jsonJwt.sign({ ids }, config.secretKey, { expiresIn: "10m",});
       res.send({ msg: generateJwt }).status(200);
     } catch (error) {
@@ -34,11 +33,11 @@ class PagamentosItens {
 
   static async postPagamento(req, res) {
     try {
-      const { ids } = req.body;
+      const { ids, frete } = req.body;
       const busqueProduct = await products.find({ _id: { $in: ids } });
       const valoresItens = busqueProduct.map((data) => data.valor).reduce((a, cc) => a + cc);
       const buscarNomesProdutos = busqueProduct.map(data => data.nome).join(",")
-      const centavos = valoresItens * 100;
+      const centavos = (valoresItens + frete) * 100
       const price_data = {
         currency: "brl",
         product_data: { name: buscarNomesProdutos },
@@ -62,8 +61,8 @@ class PagamentosItens {
       res.status(201).send({ link: "generated payment link", linkToken: url, idPay: id });
     } catch (error) {
       res.status(401).send({ msg: "the link was not generated, try again." });
-    }
-  }
-}
+    };
+  };
+};
 
-module.exports = PagamentosItens
+module.exports = PagamentosItens;
