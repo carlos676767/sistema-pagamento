@@ -14,15 +14,15 @@ const registro = require("../backend/routers/auth/registro")
 const frete = require("./routers/frete/frete")
 api.use(cors())
 api.use(bodyParser.json());
-api.use(imgRouter)
 api.use(confirm)
 api.use(login)
 api.use(passRouter)
 api.use(produtos)
 api.use(routerGitHub)
-api.use(express.static("public"))
+api.use(express.static("image"))
 api.use(registro)
 api.use(frete)
+api.use(imgRouter)
 const port = 8080 || config.port;
 (async () => {
   await connectDb();
