@@ -11,7 +11,7 @@ class loginUser {
         if (!err) {
           res.status(200).send({ login: true });
           return;
-        }
+        };
         next();
       });
     };
@@ -27,7 +27,7 @@ class loginUser {
         const payLoad = jwt.sign({ idUser }, SECRET_KEY.secretKey, {expiresIn: "60s",   });
         res.status(200).send({ login: true, msg: "data successfully validated.",  jwt: payLoad,  });
       };
-
+      
     } catch (error) {
       res.status(400).send({ login: false, msg: "an error has occurred" });
     }

@@ -7,11 +7,6 @@ class MulterMyConfig {
         st(null, "F://sistema pagamento node js//sistema-pagamento//backend//image")
       },
       filename: (req, file, st) => {
-        // const imgName = file.originalname.split(".")[1]
-        // if (imgName != 'png' || imgName != 'jpg') {
-        //   res.send("err")
-        //   return
-        // }
         st(null, file.originalname );
       },
     });
@@ -41,7 +36,6 @@ class UparImage extends MulterMyConfig {
         throw new Error("please put an image")
       }
       const imgName = req.file.originalname
-      // console.log(imgName.split("."));
       const url = `http://localhost:8080/${imgName}`
       res.status(200).send({ msg: "your image uploaded successfully", url: url });
     } catch (error) {
@@ -49,6 +43,5 @@ class UparImage extends MulterMyConfig {
     }
   }
 }
-
 
 module.exports = {UparImage, MulterMyConfig};

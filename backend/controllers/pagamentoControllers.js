@@ -38,6 +38,7 @@ class PagamentosItens {
       const valoresItens = busqueProduct.map((data) => data.valor).reduce((a, cc) => a + cc);
       const buscarNomesProdutos = busqueProduct.map(data => data.nome).join(",")
       const centavos = (valoresItens + frete) * 100
+
       const price_data = {
         currency: "brl",
         product_data: { name: buscarNomesProdutos },
@@ -58,6 +59,7 @@ class PagamentosItens {
         success_url: "http://localhost:8080/pagamentoSucesso.html",
         cancel_url: "http://localhost:8080/pagamentoCaneclado.html",
       });
+
       res.status(201).send({ link: "generated payment link", linkToken: url, idPay: id });
     } catch (error) {
       res.status(401).send({ msg: "the link was not generated, try again." });
