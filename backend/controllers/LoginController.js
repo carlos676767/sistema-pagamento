@@ -6,7 +6,6 @@ class loginUser {
   static verifyJwt(req, res, next) {
     if (req.headers.authorization) {
       const token = req.headers.authorization.split(" ")[1];
-      console.log(token);
       jwt.verify(token, SECRET_KEY.secretKey, (err, decod) => {
         if (!err) {
           res.status(200).send({ login: true });

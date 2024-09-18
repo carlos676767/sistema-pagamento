@@ -105,12 +105,7 @@ closer.addEventListener("click", () => {
   displayButton("none");
 });
 
-// productimageupload.addEventListener("change", async (e) => {
-//   const file = productimageupload.files[0];
-//   const formData = new FormData();
-//   formData.append('file', file)
-//   await httpRequestImage(formData)
-// });
+
 
 const httpRequestImage = async (img) => {
   try {
@@ -155,6 +150,6 @@ class UploaderDeImagem {
       console.log(error);
     }
   }
-}
+};
 
 UploaderDeImagem.manipularMudancaDeImagem();

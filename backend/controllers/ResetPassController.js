@@ -15,7 +15,7 @@ class ResetPass {
       }
       res.status(200).send({ msg: "check your inbox to confirm", sendEmail: true });
       const payLoad = jsonWebToken.sign({ email }, configJson.secretKey, {  expiresIn: "5m", });
-      sendEmail(email, payLoad);
+      sendEmail.sendEmail(email, payLoad)
     } catch (error) {
       res.status(404).send({ msg: "error 404" });
     }

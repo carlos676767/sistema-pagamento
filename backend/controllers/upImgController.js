@@ -12,17 +12,7 @@ class MulterMyConfig {
     });
     return multer({ storage: storage });
   }
-
-  static #randomNameImage() {
-    let nameImg = "";
-    for (let i = 0; i <= 5; i++) {
-      const generateAlfabet = Array.from(Array(26).keys()).map((data) => String.fromCharCode(data + 97));
-      const randomAlfabet = Math.floor(Math.random() * generateAlfabet.length);
-      const random = Math.floor(Math.random() * 1000) + 1;
-      nameImg += random + generateAlfabet[randomAlfabet];
-    }
-    return nameImg;
-  }
+  
 }
 
 class UparImage extends MulterMyConfig {
@@ -45,3 +35,5 @@ class UparImage extends MulterMyConfig {
 }
 
 module.exports = {UparImage, MulterMyConfig};
+
+
