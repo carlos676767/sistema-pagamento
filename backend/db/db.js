@@ -1,16 +1,15 @@
-const mongose = require("mongoose");
-const config = require("../../config.json");
-const DbInfo = {
-  url: config.urlDb,
-};
 
-const connectDb = async () => {
-  try {
-    await mongose.connect(DbInfo.url);
-    console.log("db connect.");
-  } catch (error) {
-    console.error("unexpected error");
+class MongooseDatabase{
+  static #configDb = require("../../config.json")
+  static #mongose = require("mongoose");
+  static async connectDataBase(){
+    try {
+      await this.#mongose.connect(this.#configDb.urlDb)
+    } catch (error) {
+      console.log(error)
+      throw new Error("Database nao foi possivel se connectar.")
+    }
   }
-};
+}
 
-module.exports = connectDb;
+module.exports = MongooseDatabase

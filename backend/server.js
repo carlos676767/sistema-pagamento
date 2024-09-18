@@ -25,7 +25,7 @@ api.use(frete)
 api.use(imgRouter)
 const port = 8080 || config.port;
 (async () => {
-  await connectDb();
+  await connectDb.connectDataBase()
   api.listen(port, () => {
     console.log(`server running on the port ${port}`);
   });

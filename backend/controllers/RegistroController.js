@@ -1,4 +1,5 @@
-const {randomCod, sendEmail} = require("../email/confirme");
+const Email = require("../email/alterarSenha");
+const EmailConfirmar = require("../email/confirme");
 const Db = require("../models/tempRegister");
 
 class RegistroUser {
@@ -39,8 +40,8 @@ class RegistroUser {
     if (registro) {
       throw new Error("the email already exists, register another email, thank you.");
     };
-    const codigo = randomCod();
-    await sendEmail(email, codigo)
+    const codigo = EmailConfirmar.CodigoConfirmacao()
+    await EmailConfirmar.enviarEmailConfirmacao(email, codigo)
     const tempMyDados = new Db({nome: nome, email:email,senha: senha, codigo: codigo})
     await tempMyDados.save()
     res.status(200).send({registerParser: true})
