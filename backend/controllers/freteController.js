@@ -7,6 +7,7 @@ const freteHelper = new FreteHelper({Nominate: NominateApi, RouterProject: Route
 class FreteController {
   static latSorrisoMt = -12.576666;
   static lonSorrisoMt = -56.738939;
+  
   static async postCalculeFrete(req, res) {
     try {
       const { cidade } = req.body;

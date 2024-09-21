@@ -16,7 +16,7 @@ class ResetPass {
       if (!buscarEmail) {
         throw new Error("email does not exist")
       }
-      
+
       res.status(200).send({ msg: "check your inbox to confirm", sendEmail: true });
       const payLoad = this.#jsonWebToken.sign({ email }, this.#configJson.secretKey, {  expiresIn: "5m", });
       this.#sendEmail.sendEmail(email, payLoad)
@@ -34,7 +34,7 @@ class ResetPass {
       const { jwt, senha } = req.body;
       const email = ResetPass.valideToken(jwt)
 
-      const db = await dbPessoas.findOne({ email });
+      const db = await this.#dbPessoas.findOne({ email });
       db.senha = senha;
       await db.save();
       res.status(200).send({ msg: "password was changed successfully", alterd: true });

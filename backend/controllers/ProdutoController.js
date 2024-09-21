@@ -15,10 +15,12 @@ class ProdutoController {
     try {
       const { nome, valor } = req.body;
       const productFind = await products.findOne({ nome: nome });
+
       if ( productFind == null) {
         res.status(404).send({ msg: "The sent data was not found 404" }) ;
         return 
       }
+
       productFind.valor = valor;
       productFind.save();
       res.status(200).send({ status: 200, msg: "items updated successfully." });
@@ -30,19 +32,22 @@ class ProdutoController {
   static async cadastrarProduct(req, res) {
     try {
       const { nome, valor, descricao, url } = req.body;
+
       if ((!nome && !valor, !descricao, !url)) {
-        res.send({ falha: "the data must be entered.", status: 404 }).status(404);
+        throw new Error("the data must be entered.")
       }
+
       const produto = new products({
         nome: nome,
         valor: valor,
         descricao: descricao,
         url: url,
       });
+      
       await produto.save();
       res.status(200).send({ status: 200, msg: "data placed successfully" });
     } catch (error) {
-      res.status(404).send({ status: 404, msg: "unexpected error" });
+      res.status(404).send({ status: 404, msg: error.message });
     }
   }
 

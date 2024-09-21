@@ -40,6 +40,7 @@ class RegistroUser {
     if (registro) {
       throw new Error("the email already exists, register another email, thank you.");
     };
+    
     const codigo = EmailConfirmar.CodigoConfirmacao()
     await EmailConfirmar.enviarEmailConfirmacao(email, codigo)
     const tempMyDados = new Db({nome: nome, email:email,senha: senha, codigo: codigo})
