@@ -1,48 +1,55 @@
 
-const configJson = require("./../../config.json");
-const sendEmail = require("../email/alterarSenha");
-const dbPessoas = require("../models/registerModel");
-const jsonWebToken = require("jsonwebtoken");
-const path = require("path");
+
 class ResetPass {
+  static #path = require("path")
+  static #jsonWebToken = require("jsonwebtoken")
+  static #dbPessoas = require("../models/registerModel");
+  static #configJson = require("./../../config.json");
+  static #sendEmail = require("../email/alterarSenha");
+
+
   static async solicitacaoTrocarSenha(req, res) {
     try {
       const { email } = req.body;
-      const buscarEmail = await dbPessoas.findOne({ email });
+      const buscarEmail = await this.#dbPessoas.findOne({ email });
+
       if (!buscarEmail) {
-        res.status(400).send({ msg: "email does not exist", sendEmail: false });
-        return;
+        throw new Error("email does not exist")
       }
+      
       res.status(200).send({ msg: "check your inbox to confirm", sendEmail: true });
-      const payLoad = jsonWebToken.sign({ email }, configJson.secretKey, {  expiresIn: "5m", });
-      sendEmail.sendEmail(email, payLoad)
+      const payLoad = this.#jsonWebToken.sign({ email }, this.#configJson.secretKey, {  expiresIn: "5m", });
+      this.#sendEmail.sendEmail(email, payLoad)
     } catch (error) {
-      res.status(404).send({ msg: "error 404" });
+      res.status(404).send({ msg: error.message });
     }
   }
 
   static paginaTrocarSenha(req, res) {
-    res.sendFile( path.join(__dirname, "..", "..", "frontend", "confirmCodPass.html")  );
+    res.sendFile( this.#path.join(__dirname, "..", "..", "frontend", "confirmCodPass.html")  );
   }
 
   static async trocarSenha(req, res) {
     try {
       const { jwt, senha } = req.body;
-      jsonWebToken.verify(jwt, configJson.secretKey, async (err, sucess) => {
-        if (err) {
-          res.status(403).send({ msg: "The time limit has expired, make a new request to change password again.", err: true});
-          return;
-        }
+      const email = ResetPass.valideToken(jwt)
 
-        const { email } = sucess;
-        const db = await dbPessoas.findOne({ email });
-        db.senha = senha;
-        res.status(200).send({ msg: "password was changed successfully", alterd: true });
-        await db.save();
-      });
+      const db = await dbPessoas.findOne({ email });
+      db.senha = senha;
+      await db.save();
+      res.status(200).send({ msg: "password was changed successfully", alterd: true });
     } catch (error) {
-      res.status(404).send({ msg: "an unexpected error occurred" });
+      res.status(404).send({ msg: error.message });
     }
+  }
+
+  static valideToken(tk){
+    this.#jsonWebToken.verify(tk, this.#configJson, (err, decoded) => {
+      if (err) {
+        throw new Error("The time limit has expired, make a new request to change password again.")
+      }
+      return {email} = decoded
+    })
   }
 }
 

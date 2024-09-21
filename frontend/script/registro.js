@@ -1,32 +1,41 @@
+class Registro {
+  static buttom = document.querySelector("button");
+  static form = document.querySelector("form");
+   
+  static async requisicaoRegistroUser() {
+    try {
+      const dados = {
+        nome: this.form.nome.value.trim(),
+        email: this.form.email.value.trim(),
+        senha: this.form.senha.value.trim(),
+      };
 
+      const data = await fetch("http://localhost:8080/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dados),
+      });
 
-const buttom = document.querySelector("button");
-const form = document.querySelector("form");
-console.log(location.href);
-
-const httpPost = async () => {
-  console.log( form.nome.value,form.email.value ,  form.senha.value);
-  try {
-    const data = await fetch("http://localhost:8080/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ nome: form.nome.value, email: form.email.value, senha: form.senha.value }),
-    });
-    const response = await data.json();
-    console.log(response);
-    const {registerParser} = response
-    if (registerParser) {
-      location.href = "/sistema-pagamento/frontend/code.html"
+      const { registerParser } = data.json();
+      this.redirectPagina(registerParser);
+    } catch (error) {
+      console.log(error);
     }
-    console.log(response);
-  } catch (error) {
-    console.log(error);
   }
-};
 
-buttom.addEventListener("click", (e) => {
-  e.preventDefault();
-  httpPost();
-});
+  static redirectPagina(response) {
+    if (response) {
+      location.href = "/sistema-pagamento/frontend/code.html";
+    }
+  }
+
+  static buttonEvent() {
+    this.buttom.addEventListener("click", () => {
+      Registro.requisicaoRegistroUser();
+    });
+  }
+}
+
+Registro.buttonEvent();
