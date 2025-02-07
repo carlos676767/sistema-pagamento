@@ -11,7 +11,7 @@ class ConfirmSenha {
   static async busqueCodDb(req, res) {
     const { codigo } = req.body;
     const database = await this.DbTemp.findOne({ codigo });
-    
+ 
     if (!database) {
       res.status(404).send({ message: "codigo nao encontrado." });
       return;

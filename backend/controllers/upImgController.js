@@ -1,10 +1,10 @@
 const multer = require("multer");
-
+const path = require("path");
 class MulterMyConfig {
   static configMulter() {
     const storage = multer.diskStorage({
       destination: (req, res, st) => {
-        st(null, "F://sistema pagamento node js//sistema-pagamento//backend//image")
+        st(null, path.join(__dirname, `../image`) )
       },
       filename: (req, file, st) => {
         st(null, file.originalname );
